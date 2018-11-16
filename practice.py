@@ -1,5 +1,5 @@
 from builtins import print, property
-
+#---------------------------------------------List-------------------------------------------------
 num=[90,55,10,20,30,40]
 print(min(num))
 
@@ -45,6 +45,22 @@ print(sum(num2))
 num2.sort()
 print(num2)
 
-tuple={50,40,30,20,10}
+tuple=(50,40,30,20,10)
 print(tuple)
 #commit2
+#-----------------------------------tuple--------------------------------------------------
+tup1=(1,1,1,3,5,6)
+tup1.count
+print(tup1.count)
+print(tuple[0])
+
+#tup1[1]=33  tuple in python is immutable ,once we created value ,we can not change it
+
+
+
+#----------------------Set----------------------------------------------------------------
+set={22,25,14,21,5}
+print(set)
+print(set)
+set2 ={98,52,101,105,11,53,11}
+print(set2)
