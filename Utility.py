@@ -138,6 +138,21 @@ class Utility:
 
         return two_d_array
 
-        #print(two_d_array)
+
+    def find_triplet(self,store_values):
+        size=len(store_values)
+
+        for i in range(0,size-2):
+
+            for j in range(i+1,size-1):
+
+                for k in range(j+1,size):
+
+                    if (store_values[i]+store_values[j]+store_values[k]) == 0:
+
+                        print(store_values[i],end=" ")
+                        print(store_values[j],end=" ")
+                        print(store_values[k],end=" ")
+                        print("")
+
 utility_obj = Utility()
-#utility_obj.get_2d__input(3,3)
