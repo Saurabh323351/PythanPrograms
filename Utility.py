@@ -117,7 +117,7 @@ class Utility:
     def coupan_generator(self,no_of_coupans):
         store_coupans=[]
         random_number_count=0
-        while store_coupans<no_of_coupans:
+        while len(store_coupans)<= no_of_coupans:
             random_number=random.randint(1,50)
             random_number_count+=1
 
@@ -125,6 +125,19 @@ class Utility:
                 store_coupans.append(random_number)
 
 
+        return random_number_count,store_coupans
 
+
+    def get_2d__input(self,row,column):
+
+        two_d_array = [[0 for j in range(column)] for i in range(row)]
+
+        for i in range(0,row):
+            for j in range(0,column):
+                two_d_array[i][j]=Utility().get_int()
+
+        return two_d_array
+
+        #print(two_d_array)
 utility_obj = Utility()
-
+#utility_obj.get_2d__input(3,3)
