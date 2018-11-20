@@ -5,4 +5,6 @@ utility_obj = Utility()
 print("Enter limit")
 limit=utility_obj.get_int()
 
-utility_obj.power(limit)
+l=utility_obj.power(limit)
+for i in l:
+    print(i)
