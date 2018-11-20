@@ -296,4 +296,87 @@ class Utility:
                 list.append(i)
         return list
 
+        
+        
+         def get_palindrome_prime(self):
+        store_prime=Utility().get_prime()
+        s=''
+        store_palindrome_prime = []
+        for i in store_prime:
+           string=''
+           string=str(i)
+           string1=string
+           count=-1
+           reverse_string1=''
+
+           for j in range(0,len(string1)):
+               reverse_string1+=string1[count]
+               count=count-1
+
+           string1=''
+           if reverse_string1==string:
+            store_palindrome_prime.append(string)
+
+        return store_palindrome_prime
+    
+    
+        def get_anagram_prime(self):
+        store_prime = Utility().get_prime()
+        first_string_list=[]
+        second_string_list=[]
+        count = 0
+        for each_index in range(0,len(store_prime)-1):
+            first_string_list = []
+            s1=str(store_prime[each_index])
+            first_string=s1
+            count=0
+            for i in first_string:
+                first_string_list.append(i)
+
+            for i in range(0, len(first_string_list) - 1):
+
+                for j in range(i + 1, len(first_string_list)):
+                    temp = ''
+                    if first_string_list[i] > first_string_list[j]:
+                        temp = first_string_list[i]
+                        first_string_list[i] = first_string_list[j]
+                        first_string_list[j] = temp
+
+            first_string = ''
+            for i in range(0, len(first_string_list)):
+                first_string = first_string + first_string_list[i]
+
+
+            for next_index in range(each_index+1,len(store_prime)):
+
+                second_string=str(store_prime[next_index])
+
+                for i in second_string:
+                    second_string_list.append(i)
+
+                for i in range(0, len(second_string_list) - 1):
+
+                    for j in range(i + 1, len(second_string_list)):
+                        temp = ''
+                        if second_string_list[i] > second_string_list[j]:
+                            temp = second_string_list[i]
+                            second_string_list[i] = second_string_list[j]
+                            second_string_list[j] = temp
+
+                second_string = ''
+                for i in range(0, len(second_string_list)):
+                    second_string = second_string + second_string_list[i]
+
+                if first_string==second_string:
+                    print(store_prime[next_index])
+                    count+=1
+
+                second_string_list=[]
+
+
+            if count>=1:
+                print(store_prime[each_index])
+
+
+    
 utility_obj = Utility()
