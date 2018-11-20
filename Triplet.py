@@ -1,4 +1,4 @@
-from com.bridgelab.utility.Utility import Utility
+from com.bridgelabz.utility.Utility import Utility
 utility_obj=Utility()
 print("Enter Number of values you want to enter")
 no_of_values=utility_obj.get_int()
