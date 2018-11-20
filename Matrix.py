@@ -1,4 +1,4 @@
-from com.bridgelab.utility.Utility import Utility
+from com.bridgelabz.utility.Utility import Utility
 
 utility_obj = Utility()
 print("Enter Number of Rows")
