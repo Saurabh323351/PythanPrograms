@@ -4,7 +4,7 @@ from array import array
 from math import sqrt,floor,ceil
 import time
 from timeit import default_timer
-
+import cmath
 class Utility:
 
     def __init__(self):
@@ -140,6 +140,9 @@ class Utility:
                 for j in range(0, column):
                     two_d_array[i][j] = Utility().get_int()
 
+            file_object=open("Matrix.txt","w")
+            file_object.write(str(two_d_array))
+            file_object.close()
             return two_d_array
 
     def find_triplet(self, store_values):
@@ -188,8 +191,11 @@ class Utility:
         first_root=(-b+sqrt(delta))/2*a
 
         second_root=(-b-sqrt(delta))/2*a
+        #z=complex(first_root,second_root)
 
+        #x=complex((-b+sqrt(delta))/2*a,(-b-sqrt(delta))/2*a)
         return first_root,second_root
+        #return x.real,0
 
 
     def get_effective_temperature(self,temperature,velocity):
@@ -210,17 +216,17 @@ class Utility:
 
 
     def anagram_detection(self,first_string,second_string):
-        first_string=first_string
-        s2=second_string
+
+
         first_string_list=[]
-        s2_list=[]
+        second_string_list=[]
 
         lower_string=first_string.lower()
         first_string=lower_string
 
         lower_string=''
-        lower_string=s2.lower()
-        s2=lower_string
+        lower_string=second_string.lower()
+        second_string=lower_string
 
         remove_space=''
         for i in range(0,len(first_string)):
@@ -232,12 +238,12 @@ class Utility:
         first_string=remove_space
 
         remove_space = ''
-        for i in range(0, len(s2)):
-            if s2[i] == ' ':
+        for i in range(0, len(second_string)):
+            if second_string[i] == ' ':
                 continue
-            remove_space += s2[i]
+            remove_space += second_string[i]
 
-        s2 = remove_space
+        second_string = remove_space
 
         for i in first_string:
             first_string_list.append(i)
@@ -258,29 +264,34 @@ class Utility:
 
 
 
-        for i in s2:
-            s2_list.append(i)
+        for i in second_string:
+           second_string_list.append(i)
 
-        for i in range(0,len(s2_list)-1):
+        for i in range(0,len(second_string_list)-1):
 
-            for j in range(i + 1,len(s2_list)):
+            for j in range(i + 1,len(second_string_list)):
                 temp = ''
-                if s2_list[i] > s2_list[j]:
-                    temp = s2_list[i]
-                    s2_list[i] = s2_list[j]
-                    s2_list[j] = temp
+                if second_string_list[i] >second_string_list[j]:
+                    temp =second_string_list[i]
+                    second_string_list[i] =second_string_list[j]
+                    second_string_list[j] = temp
 
-        s2 = ''
-        for i in range(0, len(s2_list)):
-            s2 = s2 + s2_list[i]
+        second_string = ''
+
+
+
+        for i in range(0, len(second_string_list)):
+            second_string = second_string +second_string_list[i]
 
         s3=''
-        if first_string==s2:
+        if first_string==second_string:
             print("Both Strings are Anagram of each other")
 
 
         else:
             print('Both Strings are not Anagram of each other')
+
+
 
     def get_prime(self):
         list = []
@@ -296,40 +307,39 @@ class Utility:
                 list.append(i)
         return list
 
-        
-        
-         def get_palindrome_prime(self):
-        store_prime=Utility().get_prime()
-        s=''
+    def get_palindrome_prime(self):
+        store_prime = Utility().get_prime()
+
+        s = ''
         store_palindrome_prime = []
         for i in store_prime:
-           string=''
-           string=str(i)
-           string1=string
-           count=-1
-           reverse_string1=''
+            string = ''
+            string = str(i)
+            string1 = string
+            count = -1
+            reverse_string1 = ''
 
-           for j in range(0,len(string1)):
-               reverse_string1+=string1[count]
-               count=count-1
+            for j in range(0, len(string1)):
+                reverse_string1 += string1[count]
+                count = count - 1
 
-           string1=''
-           if reverse_string1==string:
-            store_palindrome_prime.append(string)
+            string1 = ''
+            if reverse_string1 == string:
+                store_palindrome_prime.append(string)
 
         return store_palindrome_prime
-    
-    
-        def get_anagram_prime(self):
+
+    def get_anagram_prime(self):
         store_prime = Utility().get_prime()
-        first_string_list=[]
-        second_string_list=[]
+
+        first_string_list = []
+        second_string_list = []
         count = 0
-        for each_index in range(0,len(store_prime)-1):
+        for each_index in range(0, len(store_prime) - 1):
             first_string_list = []
-            s1=str(store_prime[each_index])
-            first_string=s1
-            count=0
+            s1 = str(store_prime[each_index])
+            first_string = s1
+            count = 0
             for i in first_string:
                 first_string_list.append(i)
 
@@ -346,10 +356,9 @@ class Utility:
             for i in range(0, len(first_string_list)):
                 first_string = first_string + first_string_list[i]
 
+            for next_index in range(each_index + 1, len(store_prime)):
 
-            for next_index in range(each_index+1,len(store_prime)):
-
-                second_string=str(store_prime[next_index])
+                second_string = str(store_prime[next_index])
 
                 for i in second_string:
                     second_string_list.append(i)
@@ -367,16 +376,147 @@ class Utility:
                 for i in range(0, len(second_string_list)):
                     second_string = second_string + second_string_list[i]
 
-                if first_string==second_string:
+                if first_string == second_string:
                     print(store_prime[next_index])
-                    count+=1
+                    count += 1
 
-                second_string_list=[]
+                second_string_list = []
 
-
-            if count>=1:
+            if count >= 1:
                 print(store_prime[each_index])
 
+    @staticmethod
+    def binary_search_for_int(store_user_value, search_item):
 
-    
+        store_user_value=Utility.insertionsort_for_integer(store_user_value)
+
+        lower_limit=0
+        upper_limit=len(store_user_value)-1
+
+        while lower_limit<=upper_limit:
+
+            mid_index=(lower_limit+upper_limit)//2
+
+            if store_user_value[mid_index]==search_item:
+                return mid_index
+
+            if store_user_value[mid_index]>search_item:
+                upper_limit=mid_index-1
+
+            if store_user_value[mid_index]<search_item:
+                lower_limit=mid_index+1
+
+        print("Element Not Found")
+        return -1
+
+    @staticmethod
+    def binary_search_for_string(store_user_value,search_item):
+
+        store_user_value=Utility.insertionsort_for_string(store_user_value)
+        print(store_user_value)
+
+        lower_limit = 0
+        upper_limit = len(store_user_value) - 1
+
+        while lower_limit<=upper_limit:
+
+            mid_index=(lower_limit+upper_limit)//2
+
+            if store_user_value[mid_index]==search_item:
+
+                return mid_index
+
+
+            if store_user_value[mid_index]<search_item:
+                lower_limit=mid_index+1
+
+            if store_user_value[mid_index]>search_item:
+                upper_limit=mid_index-1
+
+        print("Element Not Found")
+        return -1
+
+
+
+    @staticmethod
+    def insertionsort_for_integer(number_list):
+
+        for i in range(1,len(number_list)):
+            index=i
+            j=i-1
+            while j>=0:
+
+                if number_list[j]>number_list[index]:
+                    temp=number_list[j]
+                    number_list[j]=number_list[index]
+                    number_list[index]=temp
+                    index=j
+                j=j-1
+
+        return number_list
+
+    @staticmethod
+    def insertionsort_for_string(string_list):
+
+        string_list=['java','php','python','atom','javascript']
+
+        for i in range(1,len(string_list)):
+
+            index=i
+            j=i-1
+            while j>=0:
+
+                if string_list[j]>string_list[index]:
+                    temp=string_list[j]
+                    string_list[j]=string_list[index]
+                    string_list[index]=temp
+                    index=j
+
+                j=j-1
+
+        return string_list
+
+
+    @staticmethod
+    def bubblesort_for_integer():
+
+        integer_list=[50,60,1,2,80,0]
+
+        for i in range(0,len(integer_list)-1):
+
+            for j in range(i+1,len(integer_list)):
+
+                if integer_list[i]>integer_list[j]:
+                    temp=integer_list[i]
+                    integer_list[i]=integer_list[j]
+                    integer_list[j]=temp
+
+        return integer_list
+
+    @staticmethod
+    def bubblesort_for_string(string_list):
+
+        #string_list = ['java', 'aim', 'php', 'python', 'palindrome', 'bat']
+
+        for i in range(0, len(string_list) - 1):
+
+            for j in range(i + 1, len(string_list)):
+
+                if string_list[i] > string_list[j]:
+                    temp = string_list[i]
+                    string_list[i] = string_list[j]
+                    string_list[j] = temp
+
+        return string_list
+
+
+
+
+     
+
+
+
+
 utility_obj = Utility()
+
+
