@@ -413,7 +413,7 @@ class Utility:
     def binary_search_for_string(store_user_value,search_item):
 
         store_user_value=Utility.insertionsort_for_string(store_user_value)
-        print(store_user_value)
+        #print(store_user_value)
 
         lower_limit = 0
         upper_limit = len(store_user_value) - 1
@@ -458,7 +458,7 @@ class Utility:
     @staticmethod
     def insertionsort_for_string(string_list):
 
-        string_list=['java','php','python','atom','javascript']
+       # string_list=['java','php','python','atom','javascript']
 
         for i in range(1,len(string_list)):
 
@@ -509,14 +509,106 @@ class Utility:
 
         return string_list
 
+    def number_guess_game(self, lowerlimit, upperlimit):
+
+        while lowerlimit <= upperlimit:
+            if lowerlimit == upperlimit:
+                print('Your Number is => ' + str(lowerlimit))
+                print("Intermediary numbers is " + str(lowerlimit - 1) + " and " + str(lowerlimit + 1))
+                return
+
+            mid_value = (lowerlimit + upperlimit) // 2
+            print('1. ' + str(lowerlimit) + ' - ' + str(mid_value))
+            print('2. ' + str(mid_value + 1) + ' - ' + str(upperlimit))
+            choice = Utility().get_int()
+            if choice == 1:
+                upperlimit = mid_value
+
+            if choice == 2:
+                lowerlimit = mid_value + 1
 
 
+    @staticmethod
+    def binarysearch_wordlist():
+        file_obj = open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/utility/WordList.txt", "r+")
+        lines=['saurabh\n','rajat\n','suraj\n','aman\n']
 
-     
+        file_obj.writelines(lines)
+        file_obj.close()
 
+        file_obj=open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/utility/WordList.txt","r")
+
+        list=file_obj.readlines()
+        file_obj.close()
+
+        list=Utility.insertionsort_for_string(list)
+
+
+        for i in range(0,len(list)):
+            list[i]=list[i].strip() #here i am using strip() to remove \n from each element from list
+
+        return list
+
+
+    @staticmethod
+    def insertionsort_file():
+        file_obj=open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/utility/WordList.txt","r")
+        list=file_obj.readlines()
+
+        for i in range(0,len(list)):
+            list[i]=list[i].strip()
+
+
+        list=Utility.insertionsort_for_string(list)
+        return list
+
+
+    @staticmethod
+    def bubblesort_file():
+        file_obj1= open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/utility/NumberFile", "r+")
+        list_number=[50,60,40,10,2,3,0]
+
+        for i in list_number:
+            file_obj1.write('%d\n' % i) #it is outdated method to write integer into file
+            #file_obj1.write('{}'.format(i)) # this is modern method for writing integer into file
+
+        #file_obj1.writelines(str(list_number))
+        file_obj1.close()
+
+        file_obj1=open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/utility/NumberFile", "r")
+        list_number=file_obj1.readlines()
+
+
+        for i in range(0,len(list_number)):
+            list_number[i]=list_number[i].strip()
+
+
+        for i in range(0,len(list_number)):
+            list_number[i]=int(list_number[i])
+
+        list_number=Utility.bubblesort_for_integer()
+        return list_number
+
+
+    @staticmethod
+    def get_vending_machine_result(num):
+
+        notes_list=[1,2,5,10,50,100,500,1000]
+
+        # if num>0:
+        #     i=i+1
+        #     Utility.get_vending_machine_result()
+
+        j=-1
+        for i in range(1,len(notes_list)+1):
+
+            while num%notes_list[i*j]==0:
+
+                    num=num/notes_list[i]
+                    print(notes_list[i])
 
 
 
 utility_obj = Utility()
 
-
+#Utility.get_vending_machine_result(2500)
