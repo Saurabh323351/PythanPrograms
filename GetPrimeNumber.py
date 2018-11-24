@@ -1,4 +1,4 @@
-from com.bridgelabz.utility.Utility import Utility
+from com.bridgelabz.util.utility import Utility
 
 
 utility_obj=Utility()

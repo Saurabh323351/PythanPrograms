@@ -1,4 +1,4 @@
-from com.bridgelabz.utility.Utility import Utility
+from com.bridgelabz.util.utility import Utility
 
 
 sorted_list=Utility.insertionsort_file()
