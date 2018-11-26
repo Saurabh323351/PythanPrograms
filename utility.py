@@ -169,6 +169,25 @@ class Utility:
         euclidean_distance=sqrt(x**2+y**2)
         return euclidean_distance
 
+    # Python program to print all permutations with
+    # duplicates allowed
+
+    def toString(self,List):
+        return ''.join(List)
+
+    # Function to print permutations of string
+    # This function takes three parameters:
+    # 1. String
+    # 2. Starting index of the string
+    # 3. Ending index of the string.
+    def permute(self,a, l, r):
+        if l == r:
+            print(Utility().toString(a))
+        else:
+            for i in range(l, r + 1):
+                a[l], a[i] = a[i], a[l]
+                Utility().permute(a, l + 1, r)
+                a[l], a[i] = a[i], a[l]  # backtrack
 
     def get_elapsed_time(self,choice):
 
@@ -552,8 +571,8 @@ class Utility:
 
     @staticmethod
     def insertionsort_file():
-        file_obj=open("/home/bridgeit/PycharmProjects/BridgelabzProject/com/bridgelabz/util/WordList.txt","r")
-        list=file_obj.readlines()
+        file_obj=open("../util/WordList.txt", "r")
+        list= file_obj.readlines()
 
         for i in range(0, len(list)):
             list[i]=list[i].strip()
@@ -588,6 +607,33 @@ class Utility:
 
         list_number=Utility.bubblesort_for_integer()
         return list_number
+
+
+    def merge(self,left,right):
+        result=[]
+        i,j=0,0
+        while i<len(left) and j<len(right):
+            if left[i]<=right[j]:
+                result.append(left[i])
+                i=i+1
+            else:
+                result.append(right[j])
+                j=j+1
+
+
+        result=result+left[i:]
+        result=result+right[j:]
+        return result
+
+    def mergesort(self,lst):
+        if(len(lst)<=1):
+            return lst
+
+        mid=int(len(lst)/2)
+        left=utility_obj.mergesort(lst[:mid])
+        right=utility_obj.mergesort(lst[mid:])
+        return utility_obj.merge(left,right)
+
 
 
     @staticmethod
@@ -723,41 +769,12 @@ class Utility:
 
 
 
-    
-    #string permutatin
-    
-    # Python program to print all permutations with
-# duplicates allowed
+
+    class LinkedList:
+
+        def __init__(self,node,):
 
 
-def toString(List):
-    return ''.join(List)
-
-
-# Function to print permutations of string
-# This function takes three parameters:
-# 1. String
-# 2. Starting index of the string
-# 3. Ending index of the string.
-def permute(a, l, r):
-    if l==r:
-        print(toString(a))
-    else:
-        for i in range(l,r+1):
-            a[l], a[i] = a[i], a[l]
-            permute(a, l+1, r)
-            a[l], a[i] = a[i], a[l] # backtrack
-
-
-# Driver program to test the above function
-string = "ABC"
-n = len(string)
-a = list(string)
-permute(a, 0, n-1)
-
-# This code is contributed by Bhavya Jain
-
-    
 
 
 utility_obj = Utility()
