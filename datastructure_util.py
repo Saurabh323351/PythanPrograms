@@ -190,3 +190,60 @@ if result==False:
 
 
 linkedlist_obj.show()
+
+
+
+
+class OrderedList:
+    head = None
+    list = [10, 1, 2, 7, 5, 3]
+
+    def __init__(self):
+        pass
+
+    def add(self, data):
+        node = Node(data)
+        if self.head == None:
+            self.head = node
+
+        else:
+            traverse = self.head
+            if self.head.data > node.data:
+                self.head = node
+                node.next = traverse
+
+            if self.head.data < node.data:
+               temp = self.head
+               while traverse.next!=None:
+                   if traverse.data<node.data:
+                       temp=traverse
+                   traverse = traverse.next
+
+               if traverse.data < node.data:
+                   temp = traverse
+
+               temp1 = temp.next
+               temp.next= node
+               node.next = temp1
+
+
+    def show(self):
+        traverse = self.head
+        while traverse.next != None:
+            print(traverse.data)
+            traverse = traverse.next
+        print(traverse.data)
+
+
+ordered_list = OrderedList()
+ordered_list.add(10)
+ordered_list.add(1)
+ordered_list.add(2)
+ordered_list.add(3)
+ordered_list.add(4)
+ordered_list.add(11)
+ordered_list.add(5)
+ordered_list.add(-1)
+ordered_list.add(-2)
+ordered_list.add(6)
+ordered_list.show()
