@@ -558,16 +558,165 @@ class Queue:
         self.front=self.front.next
         return temp.data
 
-queue=Queue()
-queue.enqueue(10)
-queue.enqueue(20)
-queue.enqueue(30)
-queue.enqueue(40)
-queue.enqueue(50)
+    def is_empty(self):
 
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
-queue.show()
+        if self.front==None:
+            return True
+        else:
+            return False
+
+    def size(self):
+
+
+        size=1
+        traverse=self.front
+        if self.front==None:
+            return 0
+
+        while traverse.next!=None:
+            traverse=traverse.next
+            size+=1
+        return size
+
+
+queue=Queue()
+# queue.enqueue(10)
+# queue.enqueue(20)
+# queue.enqueue(30)
+# queue.enqueue(40)
+# queue.enqueue(50)
+#
+# queue.dequeue()
+# queue.dequeue()
+#
+# queue.show()
+# print(queue.is_empty())
+# print(queue.size())
+
+class Deque:
+    front=None
+    rear=None
+    def __init__(self):
+        pass
+
+    def add_front(self,data):
+        node=Node(data)
+        if self.front==None and self.rear==None:
+            self.front=node
+            self.rear=node
+
+        else:
+            node.next=self.front
+            self.front=node
+
+    def add_rear(self, data):
+
+        node = Node(data)
+
+        if self.front == None and self.rear == None:
+
+            self.front = node
+            self.rear = node
+
+        else:
+
+            self.rear.next = node
+            self.rear = node
+
+
+    def show(self):
+
+        if self.front == None:
+            print("Queue  is empty")
+            return
+
+        while self.front.next != None:
+            print(self.front.data)
+            self.front = self.front.next
+
+        print(self.front.data)
+
+    def remove_front(self):
+
+        temp = self.front
+        self.front = self.front.next
+        return temp.data
+
+    def remove_rear(self):
+
+        traverse=self.front
+        if self.rear==self.front:
+            self.rear=None
+            self.front=None
+            return traverse.data
+
+        while traverse.next!=self.rear:
+            traverse=traverse.next
+
+        rear_value=self.rear
+        self.rear=traverse
+        traverse.next=None
+        return rear_value.data
+
+    def is_empty(self):
+
+        if self.front == None:
+            return True
+        else:
+            return False
+
+    def size(self):
+
+        size = 1
+        traverse = self.front
+        if self.front == None:
+            return 0
+
+        while traverse.next != None:
+            traverse = traverse.next
+            size += 1
+        return size
+
+
+deque=Deque()
+
+
+
+# deque.add_rear(40)
+
+# deque.add_rear(60)
+# deque.add_rear(70)
+
+# deque.remove_front()
+# deque.remove_front()
+
+# print( deque.remove_rear())
+# print( deque.remove_rear())
+
+
+
+# deque.remove_rear()
+# deque.remove_rear()
+
+# print(deque.is_empty())
+# print(deque.size())
+
+# deque.show()
+
+def palindrome_checker():
+
+    print("Enter String to Check for Palindrome")
+    string=Utility().get_string()
+
+    for i in string:
+        deque.add_rear(i)
+    reverse_string=''
+    for i in range(0,deque.size()):
+       reverse_string+=str(deque.remove_rear())
+
+
+    if string==reverse_string:
+        return True
+    else:
+        return False
+print(palindrome_checker())
