@@ -775,6 +775,35 @@ logic_obj.prime_no_2d_array()
 
 
 
+def prime_number_2d_array():
+
+    prime_list = utility_obj.get_prime()
+    row=8
+    column=21
+    # list_2d=[[].insert(0,22),[].append(23),[].append(24),[].append(25),[].append(26)]
+    list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    two_d_array = [[0 for j in range(column)] for i in range(row)]
+
+    # list_2d.insert([0][1],22)
+
+    k=0
+    for i in range(row):
+
+
+        for j in range(column):
+
+            if k<len(prime_list):
+                two_d_array[i][j] =prime_list[k]
+                k+=1
+
+
+    for i in range(row):
+
+        for j in range(column):
+            print(two_d_array[i][j],end=" ")
+
+        print()
+prime_number_2d_array()
 
 
 
