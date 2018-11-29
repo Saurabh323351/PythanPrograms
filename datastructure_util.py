@@ -703,20 +703,119 @@ deque=Deque()
 
 # deque.show()
 
-def palindrome_checker():
-
-    print("Enter String to Check for Palindrome")
-    string=Utility().get_string()
-
-    for i in string:
-        deque.add_rear(i)
-    reverse_string=''
-    for i in range(0,deque.size()):
-       reverse_string+=str(deque.remove_rear())
 
 
-    if string==reverse_string:
-        return True
-    else:
-        return False
-print(palindrome_checker())
+class BinaryTreeNode:
+
+    # def __init__(self, data,left=None, right=None):
+    #     self.data = data
+    #     self.left = left
+    #     self.right=right
+    def __init__(self):
+        pass
+
+    def count_binary_search_tree(self,test_cases):
+
+
+
+        for i in test_cases:
+            fact1=1
+            for j in range(1,(i*2)+1):
+
+                fact1=fact1*j
+
+            fact2 = 1
+            num=i+1
+            for l in range(1, num+1):
+                fact2 = fact2 * l
+
+            nfact = 1
+
+            for k in range(1, i+ 1):
+                nfact = nfact * k
+
+            number_of_bst=(fact1//(fact2*nfact))%100000007
+            print(number_of_bst)
+
+utility_obj=Utility()
+
+class Logic:
+
+    def __init__(self):
+        pass
+
+    def anagram_stack(self):
+        for i in utility_obj.get_anagram_prime():
+            stack.push(i)
+
+        for i in range(0,stack.size()):
+            print(stack.pop())
+
+
+    def anagram_queue(self):
+        for i in utility_obj.get_anagram_prime():
+            queue.enqueue(i)
+
+        for i in range(0,queue.size()):
+            print(queue.dequeue())
+
+    def prime_no_2d_array(self):
+
+        list=[[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+
+        print(list[3][0])
+
+
+       
+
+
+
+logic_obj=Logic()
+logic_obj.prime_no_2d_array()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
