@@ -188,7 +188,7 @@ class LinkedList:
 
 # list.pop()
 # list.show()
-
+#
 # file=open("LinkedList_File","w+")
 # list=['saurabh ','rajat ','shubham ','rohini']
 # file.writelines(list)
@@ -461,7 +461,7 @@ class Stack:
 
 
 stack = Stack()
-
+stack1 = Stack()
 # stack.push(56)
 # stack.push(57)
 # stack.push(58)
@@ -483,24 +483,23 @@ stack = Stack()
 # print(stack.is_empty())
 # stack.show()
 
-string="{(([{}]))}"
+string = "{(([{}]))}"
 
 for i in string:
-    #print(i)
-    if i == '(' or i=='[' or i=='{':
+    # print(i)
+    if i == '(' or i == '[' or i == '{':
         stack.push(i)
         # stack.show()
 
-
-
-    if ((stack.peek() == '(' and i==')') or (stack.peek() == '[' and i==']' )or (stack.peek() == '{' and i=='}') ) and stack.size()>0:
+    if ((stack.peek() == '(' and i == ')') or (stack.peek() == '[' and i == ']') or (
+            stack.peek() == '{' and i == '}')) and stack.size() > 0:
         stack.pop()
         continue
 
-
-
-    if i == ')'or  i==']' or i=='}':
+    if i == ')' or i == ']' or i == '}':
         stack.push(i)
+
+
 #
 # if stack.size()==0:
 #     print("Balanced Parenthesis ")
@@ -511,36 +510,30 @@ for i in string:
 
 
 class Queue:
-
-    front=None
-    rear=None
+    front = None
+    rear = None
 
     def __init__(self):
         pass
-
 
     def enqueue(self, data):
 
         node = Node(data)
 
-        if self.front == None and self.rear==None:
+        if self.front == None and self.rear == None:
 
             self.front = node
-            self.rear=node
+            self.rear = node
 
         else:
-
-
 
             # while traverse.next != None:
             #     traverse = traverse.next
 
             self.rear.next = node
-            self.rear=self.rear.next
+            self.rear = self.rear.next
 
     def show(self):
-
-
 
         if self.front == None:
             print("Linked List  is empty")
@@ -554,32 +547,34 @@ class Queue:
 
     def dequeue(self):
 
-        temp=self.front
-        self.front=self.front.next
+        temp = self.front
+        self.front = self.front.next
         return temp.data
 
     def is_empty(self):
 
-        if self.front==None:
+        if self.front == None:
             return True
         else:
             return False
 
     def size(self):
 
-
-        size=1
-        traverse=self.front
-        if self.front==None:
+        size = 1
+        traverse = self.front
+        if self.front == None:
             return 0
 
-        while traverse.next!=None:
-            traverse=traverse.next
-            size+=1
+        while traverse.next != None:
+            traverse = traverse.next
+            size += 1
         return size
 
 
-queue=Queue()
+queue = Queue()
+
+
+
 # queue.enqueue(10)
 # queue.enqueue(20)
 # queue.enqueue(30)
@@ -594,20 +589,21 @@ queue=Queue()
 # print(queue.size())
 
 class Deque:
-    front=None
-    rear=None
+    front = None
+    rear = None
+
     def __init__(self):
         pass
 
-    def add_front(self,data):
-        node=Node(data)
-        if self.front==None and self.rear==None:
-            self.front=node
-            self.rear=node
+    def add_front(self, data):
+        node = Node(data)
+        if self.front == None and self.rear == None:
+            self.front = node
+            self.rear = node
 
         else:
-            node.next=self.front
-            self.front=node
+            node.next = self.front
+            self.front = node
 
     def add_rear(self, data):
 
@@ -622,7 +618,6 @@ class Deque:
 
             self.rear.next = node
             self.rear = node
-
 
     def show(self):
 
@@ -644,18 +639,18 @@ class Deque:
 
     def remove_rear(self):
 
-        traverse=self.front
-        if self.rear==self.front:
-            self.rear=None
-            self.front=None
+        traverse = self.front
+        if self.rear == self.front:
+            self.rear = None
+            self.front = None
             return traverse.data
 
-        while traverse.next!=self.rear:
-            traverse=traverse.next
+        while traverse.next != self.rear:
+            traverse = traverse.next
 
-        rear_value=self.rear
-        self.rear=traverse
-        traverse.next=None
+        rear_value = self.rear
+        self.rear = traverse
+        traverse.next = None
         return rear_value.data
 
     def is_empty(self):
@@ -678,8 +673,7 @@ class Deque:
         return size
 
 
-deque=Deque()
-
+deque = Deque()
 
 
 # deque.add_rear(40)
@@ -694,7 +688,6 @@ deque=Deque()
 # print( deque.remove_rear())
 
 
-
 # deque.remove_rear()
 # deque.remove_rear()
 
@@ -702,7 +695,6 @@ deque=Deque()
 # print(deque.size())
 
 # deque.show()
-
 
 
 class BinaryTreeNode:
@@ -714,30 +706,29 @@ class BinaryTreeNode:
     def __init__(self):
         pass
 
-    def count_binary_search_tree(self,test_cases):
-
-
+    def count_binary_search_tree(self, test_cases):
 
         for i in test_cases:
-            fact1=1
-            for j in range(1,(i*2)+1):
-
-                fact1=fact1*j
+            fact1 = 1
+            for j in range(1, (i * 2) + 1):
+                fact1 = fact1 * j
 
             fact2 = 1
-            num=i+1
-            for l in range(1, num+1):
+            num = i + 1
+            for l in range(1, num + 1):
                 fact2 = fact2 * l
 
             nfact = 1
 
-            for k in range(1, i+ 1):
+            for k in range(1, i + 1):
                 nfact = nfact * k
 
-            number_of_bst=(fact1//(fact2*nfact))%100000007
+            number_of_bst = (fact1 // (fact2 * nfact)) % 100000007
             print(number_of_bst)
 
-utility_obj=Utility()
+
+utility_obj = Utility()
+
 
 class Logic:
 
@@ -748,103 +739,240 @@ class Logic:
         for i in utility_obj.get_anagram_prime():
             stack.push(i)
 
-        for i in range(0,stack.size()):
+        for i in range(0, stack.size()):
             print(stack.pop())
-
 
     def anagram_queue(self):
         for i in utility_obj.get_anagram_prime():
             queue.enqueue(i)
 
-        for i in range(0,queue.size()):
+        for i in range(0, queue.size()):
             print(queue.dequeue())
 
     def prime_no_2d_array(self):
 
-        list=[[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
+        list = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
 
         print(list[3][0])
 
+    def prime_number_2d_array(self):
 
-       
+        prime_list = utility_obj.get_prime()
+        row = 10
+        column = 25
+        limit = 100
 
+        two_d_array = [[0 for j in range(column)] for i in range(row)]
 
+        k = 0
+        for i in range(row):
 
-logic_obj=Logic()
-logic_obj.prime_no_2d_array()
+            for j in range(column):
 
+                if k < len(prime_list):
+                    if prime_list[k] <= limit:
+                        two_d_array[i][j] = prime_list[k]
+                        k += 1
 
+            limit += 100
 
-def prime_number_2d_array():
+        for i in range(row):
 
-    prime_list = utility_obj.get_prime()
-    row=8
-    column=21
-    # list_2d=[[].insert(0,22),[].append(23),[].append(24),[].append(25),[].append(26)]
-    list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    two_d_array = [[0 for j in range(column)] for i in range(row)]
+            for j in range(column):
 
-    # list_2d.insert([0][1],22)
+                if two_d_array[i][j] != 0:
+                    print(two_d_array[i][j], end=" ")
 
-    k=0
-    for i in range(row):
+            print()
 
+    def anagram_2d_array(self):
+        prime_list = utility_obj.get_prime()
+        anagram_list = utility_obj.get_anagram_prime()
+        not_anagram = []
+        row = 10
+        column = 25
 
-        for j in range(column):
+        two_d_array = [[0 for j in range(column)] for i in range(row)]
+        k = 0
+        index = 0
+        for i in prime_list:
+            if anagram_list.__contains__(i) != True:
+                not_anagram.append(i)
 
-            if k<len(prime_list):
-                two_d_array[i][j] =prime_list[k]
-                k+=1
+        for i in range(row):
 
+            for j in range(column):
 
-    for i in range(row):
+                if k < len(anagram_list):
+                    two_d_array[i][j] = anagram_list[k]
+                    k += 1
 
-        for j in range(column):
-            print(two_d_array[i][j],end=" ")
+                if k >= len(anagram_list) and index < len(not_anagram):
+                    two_d_array[i][j] = not_anagram[index]
+                    k += 1
+                    index += 1
+        for i in range(row):
 
+            for j in range(column):
+
+                if two_d_array[i][j] != 0:
+                    print(two_d_array[i][j], end=" ")
+
+            print()
+
+    def calender(self, month, year):
+
+        day = ['S', ' M', ' T', ' W', ' Th', 'F', ' S']
+
+        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        values = 1
+        d = 1
+
+        m = month
+        y = year
+        y0 = y - (14 - m) // 12
+        x = y0 + y0 // 4 - y0 // 100 + y0 // 400
+        m0 = m + 12 * ((14 - m) // 12) - 2
+        d0 = (d + x + 31 * m0 // 12) % 7
+
+        if utility_obj.isleap_year(str(year)):
+            days[1] = 29
+        row = 6
+        column = 7
+        two_d_array = [[0 for j in range(column)] for i in range(row)]
+
+        print('Your Calender is Ready\n')
+
+        for i in range(0, 6 + 1):
+            print(day[i], end=' ')
         print()
-prime_number_2d_array()
+        for i in range(row):
+
+            for j in range(column):
+
+                if values <= days[m - 1]:
+                    if i == 0 and j < d0:
+                        two_d_array[i][j] = ' '
+                        continue
+
+                    two_d_array[i][j] = values
+                    values += 1
+
+        for i in range(row):
+
+            for j in range(column):
+                if two_d_array[i][j] != 0:
+                    x = two_d_array[i][j]
+                    x1 = str(x).ljust(2)
+                    print(x1, end=" ")
+
+            print()
+
+    def calender_queue(self, month, year):
+
+        day = ['S', ' M', ' T', ' W', ' Th', 'F', ' S']
+
+        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        values = 1
+        d = 1
+
+        m = month
+        y = year
+        y0 = y - (14 - m) // 12
+        x = y0 + y0 // 4 - y0 // 100 + y0 // 400
+        m0 = m + 12 * ((14 - m) // 12) - 2
+        d0 = (d + x + 31 * m0 // 12) % 7
+
+        if utility_obj.isleap_year(str(year)):
+            days[1] = 29
+        row = 6
+        column = 7
+
+
+        print('Your Calender is Ready\n')
+
+        for i in range(0, 6 + 1):
+            print(day[i], end=' ')
+        print()
+        for i in range(row):
+
+            for j in range(column):
+
+                if values <= days[m - 1]:
+                    if i == 0 and j < d0:
+                        queue.enqueue(' ')
+                        continue
+
+                    queue.enqueue(values)
+                    values += 1
+
+        for i in range(row):
+
+            for j in range(column):
+                if queue.size() > 0:
+                    x = queue.dequeue()
+                    x1 = str(x).ljust(2)
+                    print(x1, end=" ")
+
+            print()
 
 
 
 
+    def calender_stack(self, month, year):
+        day = ['S', ' M', ' T', ' W', ' Th', 'F', ' S']
+
+        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        values = 1
+        d = 1
+
+        m = month
+        y = year
+        y0 = y - (14 - m) // 12
+        x = y0 + y0 // 4 - y0 // 100 + y0 // 400
+        m0 = m + 12 * ((14 - m) // 12) - 2
+        d0 = (d + x + 31 * m0 // 12) % 7
+
+        if utility_obj.isleap_year(str(year)):
+            days[1] = 29
+        row = 6
+        column = 7
 
 
+        print('Your Calender is Ready\n')
+
+        for i in range(0, 6 + 1):
+            print(day[i], end=' ')
+        print()
+        for i in range(row):
+
+            for j in range(column):
+
+                if values <= days[m - 1]:
+                    if i == 0 and j < d0:
+                        stack.push(' ')
+                        continue
+
+                    stack.push(values)
+                    values += 1
+
+        for i in range(stack.size()):
+            stack_element=stack.pop()
+            stack1.push(stack_element)
 
 
+        for i in range(row):
+
+            for j in range(column):
+                if stack1.size() > 0:
+                    x = stack1.pop()
+                    x1 = str(x).ljust(2)
+                    print(x1, end=" ")
+
+            print()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+logic_obj = Logic()
