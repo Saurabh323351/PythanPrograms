@@ -43,7 +43,7 @@ class LinkedList:
             print(traverse.data)
             traverse = traverse.next
 
-        print(traverse.data)
+        return traverse.data
 
     def is_empty(self):
 
@@ -55,6 +55,9 @@ class LinkedList:
     def search_item(self, data):
 
         traverse = self.head
+        if self.head == None:
+            return False
+
         while traverse.next != None:
 
             if traverse.data == data:
@@ -83,7 +86,7 @@ class LinkedList:
                 return count
             traverse = traverse.next
             count += 1
-        count += 1
+
         if traverse.data == data:
             return count
 
@@ -107,7 +110,7 @@ class LinkedList:
 
         if self.head.next == None:
             self.head = None
-            return traverse.data
+            print(traverse.data)
 
         while traverse.next is not None:
 
@@ -139,6 +142,9 @@ class LinkedList:
 
         traverse = self.head
         temp = self.head
+        if self.head==None:
+            return None
+
         if traverse.data == data:
             self.head = traverse.next
             return traverse.data
@@ -156,12 +162,12 @@ class LinkedList:
 # if __name__=='__main__ ':
 #
 #
-# linkedlist_obj = LinkedList()
-# linkedlist_obj.append(10)
-# linkedlist_obj.append(20)
-# linkedlist_obj.append(30)
-# linkedlist_obj.append(40)
-# linkedlist_obj.append(50)
+linkedlist_obj = LinkedList()
+linkedlist_obj.append(10)
+linkedlist_obj.append(20)
+linkedlist_obj.append(30)
+linkedlist_obj.append(40)
+linkedlist_obj.append(50)
 # print(linkedlist_obj.size())
 # linkedlist_obj.pop()
 # linkedlist_obj.pop()
@@ -574,7 +580,6 @@ class Queue:
 queue = Queue()
 
 
-
 # queue.enqueue(10)
 # queue.enqueue(20)
 # queue.enqueue(30)
@@ -749,12 +754,6 @@ class Logic:
         for i in range(0, queue.size()):
             print(queue.dequeue())
 
-    def prime_no_2d_array(self):
-
-        list = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
-
-        print(list[3][0])
-
     def prime_number_2d_array(self):
 
         prime_list = utility_obj.get_prime()
@@ -890,7 +889,6 @@ class Logic:
         row = 6
         column = 7
 
-
         print('Your Calender is Ready\n')
 
         for i in range(0, 6 + 1):
@@ -918,9 +916,6 @@ class Logic:
 
             print()
 
-
-
-
     def calender_stack(self, month, year):
         day = ['S', ' M', ' T', ' W', ' Th', 'F', ' S']
 
@@ -941,7 +936,6 @@ class Logic:
         row = 6
         column = 7
 
-
         print('Your Calender is Ready\n')
 
         for i in range(0, 6 + 1):
@@ -960,9 +954,8 @@ class Logic:
                     values += 1
 
         for i in range(stack.size()):
-            stack_element=stack.pop()
+            stack_element = stack.pop()
             stack1.push(stack_element)
-
 
         for i in range(row):
 
@@ -975,4 +968,123 @@ class Logic:
             print()
 
 
-logic_obj = Logic()
+width = 4
+t1 = (width,) * 5
+t2 = (4, 4, 4, 4, 4)
+
+
+# print(t1)
+
+# node1=LinkedList()
+#
+# node2=LinkedList()
+# node3=LinkedList()
+#
+# node4=LinkedList()
+#
+# node5=LinkedList()
+#
+# node6=LinkedList()
+#
+# node7=LinkedList()
+#
+# node8=LinkedList()
+#
+# node9=LinkedList()
+#
+# node10=LinkedList()
+#
+# node11=LinkedList()
+
+#
+# for i in range(11):
+#     objects_list.append(LinkedList())
+#
+
+
+#
+# objects_list[0].append(10)
+
+# objects_list[1].append(20)
+# objects_list[10].append(30)
+# objects_list[4].append(40)
+# objects_list[4].append(50)
+# objects_list[1].show()
+# print(objects_list[1].index(20))
+#
+# objects_list[0].append(10)
+# objects_list[0].show()
+# objects_list[1].append(20)
+# objects_list[1].show()
+#
+# objects_list[6].append(5555)
+# objects_list[6].append(6666)
+# objects_list[6].append("hi bro")
+# print(objects_list[5].show())
+# logic_obj = Logic()
+# print(len(objects_list))
+#
+class HashTable:
+
+    def __init__(self):
+        pass
+
+    objects_list = list()
+    for i in range(11):
+        objects_list.append(LinkedList())
+
+    def hash_function(self, key):
+        index = key % len(self.objects_list)
+        return index
+
+    def insert(self):
+
+        elements = [77, 26, 22, 33, 44, 56, 67, 68, 79, 24, 27]
+        file=open("HashTable File","w+")
+        for i in elements:
+            file.writelines(str(i)+' ')
+        file.close()
+
+        file = open("../util/HashTable File", "r")
+        elements = file.readlines()
+        string = elements[0]
+
+        string_list = string.split()
+
+        elements = []
+        for i in range(0, len(string_list)):
+            to_integer = int(string_list[i])
+            elements.append(to_integer)
+
+        for i in range(len(elements)):
+            index = self.hash_function(elements[i])
+            self.objects_list[index].append(elements[i])
+
+    def search(self, data):
+        index = self.hash_function(data)
+        return self.objects_list[index].search_item(data)
+
+    def file_update(self,data):
+        result=self.search(data)
+
+        if result==True:
+            index=self.hash_function(data)
+            print(self.objects_list[index].remove(data))
+            self.objects_list[index].show()
+
+
+            
+            # file = open("../util/HashTable File", "a")
+            # file.write("28")
+
+
+        if result == False:
+            index = self.hash_function(data)
+            self.objects_list[index].append(data)
+            # file = open("../util/HashTable File", "a")
+            # file.write(str(data))
+
+            # print(file.readline())
+
+h=HashTable()
+
