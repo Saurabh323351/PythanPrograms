@@ -1,4 +1,26 @@
+"""Prime Anagram Stack Program
+
+This program is used to find prime anagram within 0  to 1000 range and print
+ Anagrams in the Reverse Order using two stack
+
+ Author:
+    Saurabh <singh.saurabh3333@gmail.com>
+
+Since:
+    20 Nov,2018
+"""
+
 from com.bridgelabz.util.datastructure_util import *
 
-logic_obj=Logic()
-logic_obj.anagram_stack()
+
+def anagram_runner():
+    """
+     This method act as runner for anagram_stack()  method.
+    :return: nothing
+    """
+    logic_obj = Logic()
+    logic_obj.anagram_stack()
+
+
+if __name__ == "__main__":
+    anagram_runner()

@@ -1,12 +1,57 @@
+"""Calender Program
+
+This program is used to take month and year from user and print corresponding Calender
+
+Example:
+    Enter Month:: 11
+    Enter Year :: 2018
+
+    Your Calender is Ready
+
+    S  M  T  W  Th F  S
+                1  2  3
+    4  5  6  7  8  9  10
+    11 12 13 14 15 16 17
+    18 19 20 21 22 23 24
+    25 26 27 28 29 30
+
+Author:
+    Saurabh<singh.saurabh3333@gmail.com>
+
+Since:
+    22 Nov,2018
+"""
+
 from com.bridgelabz.util.datastructure_util import *
 from com.bridgelabz.util.utility import *
 
-utility_obj=Utility()
 
-logic_obj = Logic()
+def calender_runner():
+    """
+    This method act as runner for calender(month, year) method
 
-print('Enter Month')
-month=utility_obj.get_int()
-print('Enter Year')
-year=utility_obj.get_int()
-logic_obj.calender(month,year)
+    :return: nothing
+    """
+    utility_obj = Utility()
+
+    logic_obj = Logic()
+
+    print('Enter Month')
+    try:
+        month = utility_obj.get_int()
+    except Exception as e:
+        print(e)
+        print("Enter integer only ")
+    print('Enter Year')
+    try:
+        year = utility_obj.get_int()
+    except Exception as e:
+        print(e)
+        print("Enter integer only")
+    logic_obj.calender(month, year)
+
+
+if __name__ == "__main__":
+    calender_runner()
+
+   
