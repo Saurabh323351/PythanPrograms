@@ -42,11 +42,15 @@ class Utility:
 
         else:
             year = int(year)
-            if year % 100 == 0 and year % 400 == 0:
-                print(str(year) + " is a Leap year")
+            if year % 400 == 0:
+                return True
+            elif year%100==0:
+                return False
+            elif year%4==0:
+                return True
 
             else:
-                print(str(year) + " is not a leap year")
+                return False
 
     def power(self, limit):
         store_value=[]
@@ -350,7 +354,7 @@ class Utility:
 
     def get_anagram_prime(self):
         store_prime = Utility().get_prime()
-
+        prime_anagram=[]
         first_string_list = []
         second_string_list = []
         count = 0
@@ -396,13 +400,15 @@ class Utility:
                     second_string = second_string + second_string_list[i]
 
                 if first_string == second_string:
-                    print(store_prime[next_index])
+                    prime_anagram.append(store_prime[next_index])
                     count += 1
 
                 second_string_list = []
 
             if count >= 1:
-                print(store_prime[each_index])
+                prime_anagram.append(store_prime[each_index])
+
+        return prime_anagram
 
     @staticmethod
     def binary_search_for_int(store_user_value, search_item):
@@ -662,7 +668,7 @@ class Utility:
     @staticmethod
     def day_of_week(date,month,year):
 
-        d = date
+        d = 1
 
         m = month
         y = year
@@ -769,10 +775,6 @@ class Utility:
 
 
 
-
-    class LinkedList:
-
-        def __init__(self,node,):
 
 
 

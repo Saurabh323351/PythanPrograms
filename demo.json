@@ -1,0 +1,15 @@
+{
+  "name": "saurabh",
+  "surname": "singh",
+  "age": 22,
+  "marks": [
+    100,
+    200,
+    300
+  ],
+  "Address": {
+    "chawl": "Rajput chawl",
+    "pincode": 400101,
+    "Area": "Kandivali"
+  }
+}
