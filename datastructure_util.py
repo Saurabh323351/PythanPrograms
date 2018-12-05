@@ -988,12 +988,13 @@ class Logic:
     def __init__(self):
         pass
 
+
     def anagram_stack(self):
         """
         This method is used to print prime anagram in reverse order.
         :return: nothing
         """
-        for i in utility_obj.get_anagram_prime():
+        for i in self.utils.get_anagram_prime():
             stack.push(i)
 
         for i in range(0, stack.size()):
