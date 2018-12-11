@@ -2,6 +2,8 @@ import json
 import re
 import random
 
+from com.bridgelabz.util.datastructure_util import Queue
+from com.bridgelabz.util.utility import Utility
 from wheel.signatures.djbec import P
 
 from com.bridgelabz.util.utility import Utility
@@ -183,7 +185,7 @@ class DeckOfCards:
 
     def shuffle(self):
         suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
-        Rank = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+        Rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 
         list_cards = []
         card_suits = ''
@@ -196,8 +198,7 @@ class DeckOfCards:
                 random_no = random.randint(1, 13)
 
                 cards_rank = Rank[random_no - 1]
-                if cards_rank=="Ace"or cards_rank=="Jack" or cards_rank=="Queen" or cards_rank=="King":
-                    pass
+
                 random_no_suits = random.randint(0, 3)
                 cards_rank = cards_rank + ' ' + suits[random_no_suits]
 
@@ -216,14 +217,7 @@ class DeckOfCards:
                 two_d_array[i][j] = list_cards[index]
                 index += 1
 
-        print('\n')
-        for i in range(row):
-            print('Player ->', i + 1, ' ', end='')
-            for j in range(column):
-                print(two_d_array[i][j], end='  ')
-
-            print()
-        return list_cards
+        return list_cards, two_d_array
 
 
 card = DeckOfCards()
@@ -231,9 +225,208 @@ card = DeckOfCards()
 
 class Player:
 
-    def __init__(self, list_cards):
-        self.list_cards=list_cards
-        print(self.list_cards)
-    
+    def __init__(self, list_cards, utility_obj, queue):
+        self.list_cards = list_cards
+        self.utility_obj = utility_obj
+        self.queue = queue
 
-player_obj = Player(card.shuffle())
+    def replacing(self):
+        i = 0
+        while i < len(self.list_cards):
+
+            if bool(re.search('Ace', self.list_cards[i])):
+                self.list_cards[i] = re.sub('Ace', '14', self.list_cards[i], 1)
+
+            if bool(re.search('Jack', self.list_cards[i])):
+                self.list_cards[i] = re.sub('Jack', '11', self.list_cards[i], 1)
+
+            if bool(re.search('Queen', self.list_cards[i])):
+                self.list_cards[i] = re.sub('Queen', '12', self.list_cards[i], 1)
+
+            if bool(re.search('King', self.list_cards[i])):
+                self.list_cards[i] = re.sub('King', '13', self.list_cards[i], 1)
+
+            i += 1
+
+        ranks = []
+        number = []
+        i = 0
+        while i < len(self.list_cards):
+            ranks.append(self.list_cards[i].split(" "))
+
+            number.append(int(ranks[i][0]))
+            i += 1
+
+        number = Utility().bubblesort_for_integer(number)
+        i = 0
+        sorted_card = []
+        suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
+
+        while i < 36:
+
+            string = ''
+            random_no = random.randint(0, 3)
+            string = suits[random_no]
+            string = str(number[i]) + " " + string
+
+            while sorted_card.__contains__(string) is True:
+                random_no = random.randint(0, 3)
+                string = suits[random_no]
+                string = str(number[i]) + ' ' + string
+
+            if sorted_card.__contains__(string) is False:
+                sorted_card.append(string)
+
+            i += 1
+
+            i = 0
+            while i < len(sorted_card):
+
+                if bool(re.search('14', sorted_card[i])):
+                    sorted_card[i] = re.sub('14', 'Ace', sorted_card[i], 1)
+
+                if bool(re.search('11', sorted_card[i])):
+                    sorted_card[i] = re.sub('11', 'Jack', sorted_card[i], 1)
+
+                if bool(re.search('12', sorted_card[i])):
+                    sorted_card[i] = re.sub('12', 'Queen', sorted_card[i], 1)
+
+                if bool(re.search('13', sorted_card[i])):
+                    sorted_card[i] = re.sub('13', 'King', sorted_card[i], 1)
+
+                i += 1
+
+        player_objs = []
+        limit = 0
+        index = 9
+        for i in range(0, 4):
+            player_objs.append(Player(card.shuffle(), Utility(), Queue()))
+
+            for sorted_cards in sorted_card:
+                if limit < index:
+                    player_objs[i].queue.enqueue(sorted_card[limit])
+
+                    limit += 1
+            index += 9
+
+        for i in range(0, 4):
+            print('Player', i + 1, '\n', '----------')
+            print(player_objs[i].queue.show())
+            print('\n')
+
+
+class StockAccount:
+    pass
+
+
+P = {
+    "Person": [{
+        "Name": "Saurabh",
+        "Email id": "singh.saurabh3333@gmail.com",
+        "Address": "Kandivali",
+        "Contact": 9137722561,
+        "Total Balance": 10000
+    },
+        {
+            "Name": "Aman",
+            "Email id": "singh.aman33@gmail.com",
+            "Address": "Kandivali",
+            "Contact": 9137722558,
+            "Total Balance": 10000
+        }
+    ]
+
+}
+
+with open('../util/Person.json', 'w') as person_jf:
+    person_jf.write(json.dumps(P))
+    person_jf.close()
+
+
+class Person:
+
+    def __init__(self, stock_jf, utility_obj, person_json_value):
+        self.stock_jf = stock_jf
+        self.utility_obj = utility_obj
+        self.person_json_value = person_json_value
+
+    def add_new_person(self):
+        print('Enter Your Name')
+        name = self.utility_obj.get_string()
+        print('Enter Your Email Id')
+        emailid = self.utility_obj.get_string()
+        print('Enter Your Address')
+        address = self.utility_obj.get_string()
+        print('Enter Your Contact Number')
+        number = self.utility_obj.get_int()
+        print('Enter Your Total Balance')
+        balance = Utility().get_int()
+
+        new_person_dict = {"Name": name,
+                           "Email id": emailid,
+                           "Address": address,
+                           "Contact": number,
+                           "Total Balance": balance}
+
+        with open('../util/Person.json', 'w') as person_jf:
+            person_json_value['Person'].append(new_person_dict)
+
+            person_jf.write(json.dumps(person_json_value))
+            person_jf.close()
+
+    def buy_share(self):
+
+        for i in range(len(self.stock_jf['Stock Report'])):
+            print(i, self.stock_jf['Stock Report'][i])
+
+        print('Enter Which Company Share you want to buy')
+        choice = self.utility_obj.get_int()
+
+        print('Enter Number of Share You want to buy')
+        buy_share = self.utility_obj.get_int()
+        each_share_price = self.stock_jf['Stock Report'][choice]['Share Price']
+        amount_pay = buy_share * each_share_price
+        person_updated_balance = self.person_json_value['Person'][1]["Total Balance"] - amount_pay
+
+        with open("Person.json", "w") as jf:
+            person_json_value['Person'][1]['Total Balance'] = person_updated_balance
+            jf.write(json.dumps(person_json_value))
+            jf.close()
+
+        updated_stock_share = self.stock_jf["Stock Report"][choice]["Number of Share"] - buy_share
+
+        with open("Stock Report", "w") as jf:
+            self.stock_jf["Stock Report"][choice]["Number of Share"] = updated_stock_share
+            jf.write(json.dumps(self.stock_jf))
+            jf.close()
+
+    def sell_share(self):
+
+        print('Enter choice to sell your share to particular company')
+        for i in range(len(self.stock_jf['Stock Report'])):
+            print(i, self.stock_jf['Stock Report'][i])
+
+        choice = self.utility_obj.get_int()
+
+        print('Enter Number of share you want to sell to',  self.stock_jf['Stock Report'][choice]['Stock Name'],'company')
+        sell_share=self.utility_obj.get_int()
+        updated_stock_share = self.stock_jf["Stock Report"][choice]["Number of Share"] + sell_share
+
+        with open("Stock Report", "w") as jf:
+            self.stock_jf["Stock Report"][choice]["Number of Share"] = updated_stock_share
+            jf.write(json.dumps(self.stock_jf))
+            jf.close()
+
+with open('../util/Stock Report', 'r') as jf:
+    json_str = jf.read()
+    jf.close()
+    json_value = json.loads(json_str)
+
+with open('../util/Person.json', 'r') as person_jf:
+    json_person_str = person_jf.read()
+    person_jf.close()
+    person_json_value = json.loads(json_person_str)
+
+person_obj = Person(json_value, Utility(), person_json_value)
+# person_obj.add_new_person()
+person_obj.sell_share()
