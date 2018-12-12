@@ -319,29 +319,29 @@ class StockAccount:
     pass
 
 
-P = {
-    "Person": [{
-        "Name": "Saurabh",
-        "Email id": "singh.saurabh3333@gmail.com",
-        "Address": "Kandivali",
-        "Contact": 9137722561,
-        "Total Balance": 10000
-    },
-        {
-            "Name": "Aman",
-            "Email id": "singh.aman33@gmail.com",
-            "Address": "Kandivali",
-            "Contact": 9137722558,
-            "Total Balance": 10000
-        }
-    ]
-
-}
-
-with open('../util/Person.json', 'w') as person_jf:
-    person_jf.write(json.dumps(P))
-    person_jf.close()
-
+#
+# P = {
+#     "Person": [{
+#         "Name": "Saurabh",
+#         "Email id": "singh.saurabh3333@gmail.com",
+#         "Address": "Kandivali",
+#         "Contact": 9137722561,
+#         "Total Balance": 10000
+#     },
+#         {
+#             "Name": "Aman",
+#             "Email id": "singh.aman33@gmail.com",
+#             "Address": "Kandivali",
+#             "Contact": 9137722558,
+#             "Total Balance": 10000
+#         }
+#     ]
+#
+# }
+#
+# with open('../util/Person.json', 'w') as person_jf:
+#     person_jf.write(json.dumps(P))
+#     person_jf.close()
 
 class Person:
 
@@ -349,6 +349,69 @@ class Person:
         self.stock_jf = stock_jf
         self.utility_obj = utility_obj
         self.person_json_value = person_json_value
+        self.method_controller()
+
+    def method_controller(self):
+        print('---->''WELCOME TO SHARE MARKET', '<----')
+        print("  1.Existing Customer\n  2.New Customer\n  3.Add New Company")
+        ch = self.utility_obj.get_int()
+
+        if ch == 1:
+
+            i = 0
+            print('Enter Your Name')
+            existing_person = self.utility_obj.get_string()
+            while i < len(person_json_value["Person"]):
+                if person_json_value["Person"][i].get('Name', -1) == existing_person:
+                    index = i
+
+                i += 1
+            print('Do You Want Your Details? Y / N')
+            detail_choice = self.utility_obj.get_string()
+            if detail_choice == 'Y' or detail_choice == 'y':
+                print(person_json_value["Person"][index])
+            if detail_choice == 'N' or detail_choice == 'n':
+                pass
+
+            print('1.Buy Share \n 2.Sale Share')
+            choice = self.utility_obj.get_int()
+            if choice == 1:
+                self.buy_share(index)
+
+            if choice == 2:
+                self.sell_share(index)
+
+        if ch == 2:
+            print("You Need to Register Yourself first.So We request you to Kindly provide your details accordingly")
+            self.add_new_person()
+
+            print('Enter Your Name to see available option for you')
+            existing_person = self.utility_obj.get_string()
+            i = 0
+            while i < len(person_json_value["Person"]):
+                if person_json_value["Person"][i].get('Name', -1) == existing_person:
+                    index = i
+
+                i += 1
+            print('Do You Want Your Details? Y / N')
+            detail_choice = self.utility_obj.get_string()
+            if detail_choice == 'Y' or detail_choice == 'y':
+                print(person_json_value["Person"][index])
+            if detail_choice == 'N' or detail_choice == 'n':
+                pass
+
+            print('1.Buy Share \n 2.Sale Share')
+            choice = self.utility_obj.get_int()
+            if choice == 1:
+                self.buy_share(index)
+                exit()
+            if choice == 2:
+                self.sell_share(index)
+                exit()
+        if ch == 3:
+            self.add_new_company()
+            print('Your Company Details Added Successfully')
+            exit()
 
     def add_new_person(self):
         print('Enter Your Name')
@@ -359,6 +422,8 @@ class Person:
         address = self.utility_obj.get_string()
         print('Enter Your Contact Number')
         number = self.utility_obj.get_int()
+        print("Enter Number of share if yoy have any ,else enter zero")
+        share_no = balance = Utility().get_int()
         print('Enter Your Total Balance')
         balance = Utility().get_int()
 
@@ -366,6 +431,7 @@ class Person:
                            "Email id": emailid,
                            "Address": address,
                            "Contact": number,
+                           "Number of Share": share_no,
                            "Total Balance": balance}
 
         with open('../util/Person.json', 'w') as person_jf:
@@ -374,8 +440,27 @@ class Person:
             person_jf.write(json.dumps(person_json_value))
             person_jf.close()
 
-    def buy_share(self):
+    def add_new_company(self):
+        print('Enter Stock Name or company Name')
+        name = self.utility_obj.get_string()
+        print('Enter Your Number of share')
+        number = self.utility_obj.get_int()
+        print('Enter Your Price per share')
+        price = Utility().get_int()
 
+        new_stock_dict = {"Stock Name": name,
+
+                          "Number of Share": number,
+
+                          "Share Price": price}
+
+        with open('../util/Stock Report.json', 'w') as stock_jf:
+            self.stock_jf['Stock Report'].append(new_stock_dict)
+
+            stock_jf.write(json.dumps(self.stock_jf))
+            stock_jf.close()
+
+    def buy_share(self, index):
         for i in range(len(self.stock_jf['Stock Report'])):
             print(i, self.stock_jf['Stock Report'][i])
 
@@ -386,10 +471,16 @@ class Person:
         buy_share = self.utility_obj.get_int()
         each_share_price = self.stock_jf['Stock Report'][choice]['Share Price']
         amount_pay = buy_share * each_share_price
-        person_updated_balance = self.person_json_value['Person'][1]["Total Balance"] - amount_pay
+        print(' --> `', amount_pay, '<--will be deducted from your total balance')
+
+        person_updated_balance = self.person_json_value['Person'][index]["Total Balance"] - amount_pay
+        print('Now Your Updated Balance is ', person_updated_balance)
+        person_updated_share = person_json_value['Person'][index]['Number of Share'] + buy_share
+        print('Now Your Updated Number of share is ', person_updated_share)
 
         with open("Person.json", "w") as jf:
-            person_json_value['Person'][1]['Total Balance'] = person_updated_balance
+            person_json_value['Person'][index]['Total Balance'] = person_updated_balance
+            person_json_value['Person'][index]['Number of Share'] = person_updated_share
             jf.write(json.dumps(person_json_value))
             jf.close()
 
@@ -400,22 +491,38 @@ class Person:
             jf.write(json.dumps(self.stock_jf))
             jf.close()
 
-    def sell_share(self):
-
+    def sell_share(self, index):
         print('Enter choice to sell your share to particular company')
         for i in range(len(self.stock_jf['Stock Report'])):
             print(i, self.stock_jf['Stock Report'][i])
 
         choice = self.utility_obj.get_int()
 
-        print('Enter Number of share you want to sell to',  self.stock_jf['Stock Report'][choice]['Stock Name'],'company')
-        sell_share=self.utility_obj.get_int()
+        print('Enter Number of share you want to sell to', self.stock_jf['Stock Report'][choice]['Stock Name'],
+              'company')
+        sell_share = self.utility_obj.get_int()
         updated_stock_share = self.stock_jf["Stock Report"][choice]["Number of Share"] + sell_share
 
         with open("Stock Report", "w") as jf:
             self.stock_jf["Stock Report"][choice]["Number of Share"] = updated_stock_share
             jf.write(json.dumps(self.stock_jf))
             jf.close()
+
+        updated_person_share = self.person_json_value['Person'][index]["Number of Share"] - sell_share
+        print("Enter price for per share you want from company")
+        person_share_price = self.utility_obj.get_int()
+        person_updated_balance = self.person_json_value['Person'][index][
+                                     "Total Balance"] + person_share_price * sell_share
+        print(' --> ', person_share_price * sell_share, '<--will be Added to your total balance')
+        print('Now Your Updated Balance is ', person_updated_balance)
+        print('Now Your Updated Number of share is ', updated_person_share)
+
+        with open("Person.json", "w") as jf:
+            person_json_value['Person'][index]['Total Balance'] = person_updated_balance
+            person_json_value['Person'][index]['Number of Share'] = updated_person_share
+            jf.write(json.dumps(person_json_value))
+            jf.close()
+
 
 with open('../util/Stock Report', 'r') as jf:
     json_str = jf.read()
@@ -427,6 +534,60 @@ with open('../util/Person.json', 'r') as person_jf:
     person_jf.close()
     person_json_value = json.loads(json_person_str)
 
-person_obj = Person(json_value, Utility(), person_json_value)
-# person_obj.add_new_person()
-person_obj.sell_share()
+# person_obj = Person(json_value, Utility(), person_json_value)
+# It manages Doctors by Name, Id, Specialization and Availability (AM,  PM or both).
+# It manages Patients by Name, ID, Mobile Number and Age.
+
+Doctors_dict = {
+    "Doctors": [{
+        "Name": "Saurabh Singh",
+        "Id": 1,
+        "Specialization": "Neurologist",
+
+        " Availability": "PM"
+
+    },
+        {
+            "Name": "Rajat Singh",
+            "Id": 2,
+            " Mobile Number": "Dermatologist",
+
+            " Availability": "AM"
+
+        }
+    ]
+
+}
+
+Patients_dict = {
+    "Patients": [{
+        "Name": "Rohini Zade",
+        "Id": 1,
+        "Mobile Number": 9967493198,
+
+        " Age": 23
+
+    },
+        {
+            "Name": "Reshma Kale",
+            "Id": 2,
+            "Mobile Number": 9967493197,
+
+            " Age": 22
+        }
+    ]
+
+}
+
+with open('../util/Person.json', 'w') as person_jf:
+    person_jf.write(json.dumps(P))
+    person_jf.close()
+
+
+class Clinique:
+
+    def __init__(self, utility_obj):
+        self.utility_obj = utility_obj
+
+
+clinique = Clinique(Utility())

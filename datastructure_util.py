@@ -554,7 +554,6 @@ class OrderedList:
             file.close()
 
 
-ordered_list = OrderedList()
 
 
 class Stack:
@@ -1088,7 +1087,7 @@ class Logic:
 
             print()
 
-    def calender(self, month, year):
+    def  calender(self, month, year):
         """
         This method is used to print Calender of given month and year.
 
