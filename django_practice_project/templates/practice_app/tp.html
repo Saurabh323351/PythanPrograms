@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html>
+<head><title>Retrieving Database Information</title><style>
+
+  table, th, td {
+border: 2px solid black;
+  border-collapse: collapse;
+}
+
+th{color:green}
+td{color:red}
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+</style>
+
+</head>
+<body background="{%static 'images/beach.jpeg' %}">
+
+
+<h5>Your System Current Time is => {{date_time}}</h5>
+
+<h1>Employee Information</h1>
+{% if e_data %}
+<table >
+<thead>
+    <th>eid</th>
+    <th>ename</th>
+    <th>e_department</th>
+    <th>e_post</th>
+    <th>e_address</th>
+
+</thead>
+    {% for i in e_data %}
+
+        <tr>
+          <td>  {{i.eid}} </td>
+          <td>  {{i.ename}} </td>
+          <td>  {{i.e_department}} </td>
+           <td> {{i.e_post}} </td>
+          <td>  {{i.e_address}} </td>
+        </tr>
+    {%endfor%}
+    </table>
+{%else%}
+<p>There is no Record in database </p>
+{%endif%}
+
+</body>
+</html>
