@@ -19,3 +19,6 @@ class Student(models.Model):
     st_rollno=models.IntegerField()
     st_address=models.CharField(max_length=50)
     st_qualification=models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.st_name

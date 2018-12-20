@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    {% csrf_token %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form</title>
+
+</head>
+<body>
+<h3>Student Form</h3>
+
+
+<!--<form id="student_form" method="post" action="/practice/StudentForm/">-->
+<form method="post">{% csrf_token %}
+
+
+    <!--{% csrf_token %}-->
+
+
+    <!--<form method="post" action="">-->
+        <!--{% csrf_token %}-->
+
+        <div>
+
+            {{form.as_p}}
+
+        </div>
+
+        <button type="submit">Submit</button>
+     <!--<input type="submit" name="submit" value="Create Category" />-->
+    </form>
+
+</body>
+
+</html>
